@@ -142,7 +142,7 @@ void sha256_final(SHA256_CTX *ctx, uint8_t hash[]) {
     }
 }
 
-void generate_randomart(const char *seed, int width, int height, int num_walkers, int show_title) {
+void generate_randomart(const char *seed, int height, int width, int num_walkers, int show_title) {
     SHA256_CTX ctx;
     uint8_t hash[SHA256_BLOCK_SIZE];
     int **field;
@@ -341,14 +341,14 @@ int main(int argc, char *argv[]) {
             if (i > optind) strcat(seed, " ");
             strcat(seed, argv[i]);
         }
-        generate_randomart(seed, width, height, num_walkers, show_title);
+        generate_randomart(seed, height, width, num_walkers, show_title);
     } else {
         /* No argument: read from stdin */
         char line[4096];
         while (fgets(line, sizeof(line), stdin)) {
             /* Remove newline */
             line[strcspn(line, "\n\r")] = '\0';
-            generate_randomart(line, width, height, num_walkers, show_title);
+            generate_randomart(line, height, width, num_walkers, show_title);
             printf("\n");
         }
     }
